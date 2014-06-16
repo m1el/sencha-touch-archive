@@ -82,7 +82,7 @@ Ext.define('Kitchensink.controller.Main', {
 
         if (demo) {
             Ext.Ajax.request({
-                url: 'app/view/' + (demo.get('view') || demo.get('text')) + '.js',
+                url: '../../examples/kitchensink/app/view/' + (demo.get('view') || demo.get('text')) + '.js',
 
                 callback: function (request, success, response) {
                     setTimeout(function() {
@@ -164,7 +164,7 @@ Ext.define('Kitchensink.controller.Main', {
      * the browser's back button
      */
     hideSheets: function () {
-        Ext.each(Ext.ComponentQuery.query('sheet'), function (sheet) {
+        Ext.each(Ext.ComponentQuery.query('sheet, #editorPanel'), function (sheet) {
             sheet.setHidden(true);
         });
     }
