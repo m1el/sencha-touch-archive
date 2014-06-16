@@ -19,14 +19,6 @@
                 "status": "updated"
             },
             {
-                "text": "Touch Tweets",
-                "url": "touchtweets/index.html",
-                "iconLocation": "touchtweets/resources/icons",
-                "device": "tablet",
-                "desc": "A Sencha Touch client which allows you to search Twitter.",
-                "status": "updated"
-            },
-            {
                 "text": "Jog With Friends",
                 "url": "http://agile-anchorage-2261.herokuapp.com",
                 "iconLocation": "jog-with-friends/resources/images",
@@ -43,6 +35,14 @@
                 "status": "updated"
             },
             {
+                "text": "Touch Tomatoes",
+                "url": "touchtomatoes/index.html",
+                "iconLocation": "touchtomatoes/resources/icons",
+                "device": "phone",
+                "desc": "Rotten Tomatoes application featuring Intro Overlay, JSONP and AJAX Search.",
+                "status": "new"
+            },
+            {
                 "text": "TouchStyle",
                 "url": "touchstyle/index.html",
                 "iconLocation": "touchstyle/resources/icons",
@@ -52,6 +52,8 @@
             }
         ]
     },
+
+
     {
         "title": "Drawing/Charting Examples",
         "items": [
@@ -78,6 +80,7 @@
             }
         ]
     },
+
     {
         "title": "Component Examples",
         "items": [

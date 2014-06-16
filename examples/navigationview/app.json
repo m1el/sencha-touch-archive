@@ -32,7 +32,7 @@
      *                                      //  - "delta" to enable over-the-air delta update for this file
      *                                      //  - "full" means full update will be made when this file changes
      *          "x-bootstrap": true         // (Optional)
-     *                                      // Indicates a development mode only dependency.  
+     *                                      // Indicates a development mode only dependency.
      *                                      // These files will not be copied into the build directory or referenced
      *                                      // in the generate app.json manifest for the micro loader.
      *
@@ -72,7 +72,20 @@
      */
     "css": [
         {
-            "path": "resources/css/app.css",
+            "path": "../../resources/css/base.css",
+            "platform": ["base"],
+            "update": "delta"
+        },
+        {
+            "path": "resources/css/sencha-touch.css",
+            "platform": ["desktop", "firefox", "tizen", "ie10", "windows", "ios", "android"],
+            "theme": "Default",
+            "update": "delta"
+        },
+        {
+            "path": "resources/css/bb10.css",
+            "platform": ["blackberry"],
+            "theme": "Blackberry",
             "update": "delta"
         }
     ],
@@ -140,66 +153,5 @@
      * Uniquely generated id for this application, used as prefix for localStorage keys.
      * Normally you should never change this value.
      */
-    "id": "3a867610-670a-11e1-a90e-4318029d18bb",
-    
-    /**
-    * Platform Properties for this application.
-    * These settings are used for the Cordova Packager process to allow for 
-    * custom JS, CSS, and Resources per platform
-    */
-     "platform" : "web",
-
-     "platforms" : {
-        "web" : {
-
-        },
-        "ios" : {
-            "package": "com.myCompany",
-            "js": [
-                {
-                    "path" : "native/src/ios/cordova.js"
-                }
-            ]/*,
-            "resources": [
-                "resources/cordova/ios"
-            ],
-            "css": [
-                {
-                    "path": "resources/css/ios/app-ios.css"
-                }
-            ]*/
-        },
-        "android" : {
-            "package": "com.myCompany",
-            "js": [
-                {
-                    "path" : "native/src/android/cordova.js"
-                }
-            ]/*,
-            "resources": [
-                "resources/cordova/android"
-            ],
-            "css": [
-                {
-                    "path": "resources/css/android/app-android.css"
-                }
-            ]*/
-        },
-        "bb10" : {
-            "package": "com.myCompany",
-            "js": [
-                {
-                    "path" : "native/src/bb10/cordova.js"
-                }
-            ]/*,
-            "resources": [
-                "resources/cordova/bb10"
-            ],
-            "css": [
-                {
-                    "path": "resources/css/bb10/app-bb10.css"
-                }
-            ]*/
-        }
-    }
+    "id": "3a867610-670a-11e1-a90e-4318029d18bb"
 }
