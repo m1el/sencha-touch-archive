@@ -25,13 +25,12 @@ Ext.define('Kitchensink.view.ColumnChartStacked', {
                     },
                     {
                         iconCls: 'refresh',
-                        text: 'Refresh',
                         handler: function () {
                             Ext.getStore('OrderItems').generateData(25);
                         }
                     },
                     {
-                        iconCls: 'retweet',
+                        iconCls: 'network',
                         text: 'Group',
                         handler: function (button) {
                             var chart = Ext.ComponentQuery.query('chart', this.getParent().getParent())[0],

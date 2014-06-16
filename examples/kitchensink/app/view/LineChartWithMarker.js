@@ -50,6 +50,7 @@ Ext.define('Kitchensink.view.LineChartWithMarker', {
             {
                 xtype: 'chart',
                 store: 'Pie',
+                background: 'white',
                 interactions: [
                     {
                         type: 'panzoom',

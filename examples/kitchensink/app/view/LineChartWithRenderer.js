@@ -35,6 +35,7 @@ Ext.define('Kitchensink.view.LineChartWithRenderer', {
             {
                 xtype: 'chart',
                 store: 'Pie',
+                background: 'white',
                 series: [
                     {
                         type: 'line',

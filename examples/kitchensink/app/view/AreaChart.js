@@ -4,8 +4,14 @@
     //<feature charts>
 Ext.define('Kitchensink.view.AreaChart', {
     extend: 'Ext.Panel',
-    requires: ['Ext.chart.Chart', 'Ext.chart.interactions.PanZoom', 'Ext.chart.series.Area',
-        'Ext.chart.axis.Numeric', 'Kitchensink.view.ColorPatterns'],
+    requires: [
+        'Ext.chart.Chart',
+        'Ext.chart.interactions.PanZoom',
+        'Ext.chart.interactions.Crosshair',
+        'Ext.chart.series.Area',
+        'Ext.chart.axis.Numeric',
+        'Kitchensink.view.ColorPatterns'
+    ],
     config: {
         cls: 'card1',
         layout: 'fit',
@@ -13,20 +19,13 @@ Ext.define('Kitchensink.view.AreaChart', {
         items: [
             {
                 xtype: 'toolbar',
-                cls: 'charttoolbar',
-                top: 0,
-                right: 0,
-                zIndex: 50,
-                style: {
-                    background: 'none'
-                },
+                docked: 'top',
                 items: [
                     {
                         xtype: 'spacer'
                     },
                     {
                         iconCls: 'refresh',
-                        text: 'Refresh',
                         handler: function () {
                             Ext.getStore('OrderItems').generateData(25);
                         }
@@ -72,13 +71,43 @@ Ext.define('Kitchensink.view.AreaChart', {
                     {
                         type: 'panzoom',
                         axes: {
-                            "left": {
+                            left: {
                                 allowPan: false,
                                 allowZoom: false
                             },
-                            "bottom": {
+                            bottom: {
                                 allowPan: true,
                                 allowZoom: true
+                            }
+                        }
+                    },
+                    {
+                        type: 'crosshair',
+                        enabled: false,
+                        axes: {
+                            left: {
+                                label: {
+                                    fillStyle: 'white',
+                                    rotationRads: 0
+                                },
+                                rect: {
+                                    fillStyle: 'maroon'
+                                }
+                            },
+                            bottom: {
+                                label: {
+                                    fillStyle: 'none'
+                                },
+                                rect: {
+                                    fillStyle: 'none'
+                                }
+                            }
+                        },
+                        lines: {
+                            horizontal: {
+                                strokeStyle: 'maroon',
+                                lineWidth: 2,
+                                lineDash: [20, 5, 5, 5, 5, 5]
                             }
                         }
                     }
@@ -135,10 +164,34 @@ Ext.define('Kitchensink.view.AreaChart', {
         this.callParent();
         Ext.getStore('OrderItems').generateData(25);
         var toolbar = Ext.ComponentQuery.query('toolbar', this)[0],
-            interaction = Ext.ComponentQuery.query('interaction', this)[0];
-        if (toolbar && interaction && !interaction.isMultiTouch()) {
-            toolbar.add(interaction.getModeToggleButton());
+            interactions = Ext.ComponentQuery.query('interaction', this),
+            panzoom = interactions[0],
+            crosshair = interactions[1];
+
+        if (toolbar && panzoom && !panzoom.isMultiTouch()) {
+            toolbar.add(panzoom.getModeToggleButton());
         }
+        toolbar.add({
+            xtype: 'segmentedbutton',
+            margin: '0 5 0 0',
+            items: [
+                {
+                    text: 'Pan/Zoom',
+                    pressed: true,
+                    handler: function () {
+                        panzoom.setEnabled(true);
+                        crosshair.setEnabled(false);
+                    }
+                },
+                {
+                    text: 'Crosshair',
+                    handler: function () {
+                        crosshair.setEnabled(true);
+                        panzoom.setEnabled(false);
+                    }
+                }
+            ]
+        });
     }
 });
 //</feature>

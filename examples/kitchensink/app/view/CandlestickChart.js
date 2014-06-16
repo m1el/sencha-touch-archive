@@ -47,17 +47,21 @@ Ext.define('Kitchensink.view.CandlestickChart', {
                 interactions: [
                     {
                         type: 'panzoom',
+                        enabled: false,
                         zoomOnPanGesture: false,
                         axes: {
-                            "left": {
+                            left: {
                                 allowPan: false,
                                 allowZoom: false
                             },
-                            "bottom": {
+                            bottom: {
                                 allowPan: true,
                                 allowZoom: true
                             }
                         }
+                    },
+                    {
+                        type: 'crosshair'
                     }
                 ],
                 series: [
@@ -110,9 +114,33 @@ Ext.define('Kitchensink.view.CandlestickChart', {
     initialize: function () {
         this.callSuper();
         var toolbar = Ext.ComponentQuery.query('toolbar', this)[0],
-            interaction = Ext.ComponentQuery.query('interaction', this)[0];
-        if (toolbar && interaction && !interaction.isMultiTouch()) {
-            toolbar.add(interaction.getModeToggleButton());
+            interactions = Ext.ComponentQuery.query('interaction', this),
+            panzoom = interactions[0],
+            crosshair = interactions[1];
+
+        toolbar.add({
+            xtype: 'segmentedbutton',
+            margin: '0 5 0 0',
+            items: [
+                {
+                    text: 'Crosshair',
+                    pressed: true,
+                    handler: function () {
+                        crosshair.setEnabled(true);
+                        panzoom.setEnabled(false);
+                    }
+                },
+                {
+                    text: 'Pan/Zoom',
+                    handler: function () {
+                        panzoom.setEnabled(true);
+                        crosshair.setEnabled(false);
+                    }
+                }
+            ]
+        });
+        if (toolbar && panzoom && !panzoom.isMultiTouch()) {
+            toolbar.add(panzoom.getModeToggleButton());
         }
     }
 });

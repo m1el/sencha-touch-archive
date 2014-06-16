@@ -35,6 +35,7 @@ Ext.define('Kitchensink.view.ColumnChartWithRenderer', {
             {
                 xtype: 'chart',
                 store: 'Pie',
+                background: 'white',
                 series: [
                     {
                         type: 'bar',
